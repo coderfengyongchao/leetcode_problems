@@ -1,0 +1,54 @@
+public class IntersectionOf2Arrays {
+    
+    // another better version
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int[] nums = new int[Math.min(nums1.length, nums2.length)];
+        int count = 0; // number of intersection element
+        int index1 = 0;
+        int index2 = 0;
+        while (index1 < nums1.length && index2 < nums2.length) {
+            if (nums1[index1] == nums2[index2]) {
+                nums[count] = nums1[index1];
+                count++;
+                index1++;
+                index2++;
+            } else if (nums1[index1] > nums2[index2])
+                index2++;
+            else
+                index1++;
+        }
+        return Arrays.copyOfRange(nums, 0, count);
+    }
+    
+
+
+    //worst solution, begging for better...
+    public int[] intersection(int[] nums1, int[] nums2) {
+        List<Integer> intersection = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i: nums1) {
+            if (map.containsKey(i))
+                map.put(i, map.get(i) + 1);
+            else
+                map.put(i, 1);
+        }
+        for (int i: nums2) {
+            if (map.containsKey(i)) {
+                intersection.add(i);
+                int count = map.get(i);
+                if (count > 1)
+                    map.put(i, count - 1);
+                else
+                    map.remove(i);
+            }
+        }
+        int[] nums = new int[intersection.size()];
+        for (int i =  0; i < intersection.size(); i++) {
+            nums[i] = intersection.get(i);
+        }
+        return nums;
+    }
+
+}

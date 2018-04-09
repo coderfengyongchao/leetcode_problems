@@ -1,0 +1,23 @@
+public class CountAndSay {
+    public String countAndSay(int n) {
+        if (n == 1)
+            return "1";
+        String last = countAndSay(n - 1);
+        char[] chars = last.toCharArray();
+        int p = 0;
+        StringBuilder sb = new StringBuilder();
+        while (p < chars.length) {
+            char c = chars[p];
+            int count = 1;
+            while (p + count < chars.length) {
+                if (chars[p+count] != c)
+                    break;
+                count++;
+            }
+            sb.append(count);
+            sb.append(c);
+            p += count;
+        }
+        return sb.toString();
+    }
+}

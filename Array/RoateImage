@@ -1,0 +1,25 @@
+pubic class RoateImage {
+
+    // begging for better solutions
+    public roate(int[][] matrix) {
+        int n = matrix.length;
+        int start = 0;
+        int end = n - 1;
+        while (start < end) {
+            for (int i = 0; i < n; i++) {
+                int tmp = matrix[start][i];
+                matrix[start][i] = matrix[end][i];
+                matrix[end][i] = tmp;
+            }
+            start++;
+            end--;
+        }
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+               int tmp = matrix[j][i];
+                matrix[j][i] = matrix[i][j];
+                matrix[i][j] = tmp;
+           }
+        }
+    }
+}

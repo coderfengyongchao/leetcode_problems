@@ -1,0 +1,36 @@
+public class IsAnagram {
+    //runtime beats 54.62% of java submissions
+    public static boolean isAnagram(String s, String t) {
+        if (s.length() != t.length())
+            return false;
+        char[] chars1 = s.toCharArray();
+        char[] chars2 = t.toCharArray();
+        Arrays.sort(chars1);
+        Arrays.sort(chars2);
+        for (int i = 0; i < chars1.length; i++) {
+            if (chars1[i] != chars2[i])
+                return false;
+        }
+        return true;
+    }
+    
+    //runtime beats 94.75% of java submissions
+    public boolean isAnagram2(String s, String t) {
+        if (s.length() != t.length())
+            return false;
+        char[] chars1 = s.toCharArray();
+        char[] chars2 = t.toCharArray();
+        int[] charNums1 = new int[26];
+        int [] charNums2 = new int[26];
+        for (int i = 0; i < chars1.length; i++) {
+            charNums1[chars1[i] - 'a'] += 1;
+            charNums2[chars2[i] - 'a'] += 1;
+        }
+        for (int i = 0; i < 26; i++) {
+            if (charNums1[i] != charNums2[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
